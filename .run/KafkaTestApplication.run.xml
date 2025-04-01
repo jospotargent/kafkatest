@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="KafkaTestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="local" />
+    <log_file alias="all" path="$PROJECT_DIR$/var/log/*.log" show_all="true" />
+    <module name="kafkatest" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="be.trixo.kafkatest.KafkatestApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

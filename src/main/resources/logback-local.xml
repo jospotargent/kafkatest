@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="AUDIT_FILE" class="ch.qos.logback.core.FileAppender">
+        <!-- only log AUDIT Events -->
+        <file>./var/log/audit.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./var/log/kafkatest.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./var/log/kafkatest.log-%d.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./var/log/debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./var/log/debug.log-%d.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE_TEXT_LOGGER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="LOG_FILE"/>
+        <appender-ref ref="CONSOLE_TEXT_LOGGER"/>
+    </root>
+
+    <!-- Enable this to log queries in the debug log file (performance problem so be careful !) -->
+    <!-- To log in the console, look at application-local.properties on how to log hibernate queries. -->
+    <!-- The latter way is the preferred way because logging sql should not be done by default. -->
+    <!-- logger name="org.hibernate.SQL" level="DEBUG" additivity="true">
+        <appender-ref ref="DEBUG_FILE"/>
+    </logger -->
+
+    <!-- logger name="org.springframework.web" level="DEBUG" additivity="true">
+        <appender-ref ref="DEBUG_FILE"/>
+    </logger -->
+
+    <!-- logger name="org.springframework.security" level="TRACE" additivity="true">
+        <appender-ref ref="DEBUG_FILE"/>
+    </logger -->
+
+
+
+    <logger name="org.testcontainers" level="DEBUG" additivity="true">
+        <appender-ref ref="DEBUG_FILE"/>
+    </logger>
+</configuration>

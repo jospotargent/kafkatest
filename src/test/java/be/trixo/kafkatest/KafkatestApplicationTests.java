@@ -8,6 +8,7 @@ class KafkatestApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Empty method: just to test that the context loads.
 	}
 
 }

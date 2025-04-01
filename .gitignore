@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Local Application logs ###
+var/
+http-client.private.env.json
+
